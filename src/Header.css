@@ -1,0 +1,161 @@
+.header ul a li {
+  color: white;   /* display: block; */
+  font-size: 2rem;
+
+  /* width: 60px; */
+}
+.header ul li :hover {
+  color: #F5B23F;
+  opacity: 1;
+  /* background-color: white; */
+}
+
+.header li:hover {
+  color: #F5B23F;
+  background-color: white;
+  box-shadow: 20px 10px 20px 15px #F5B23F;
+}
+
+.header li {
+  text-align: center;
+  list-style-type: none;
+  background-color: #F5B23F;
+  width: 60px;
+  margin-right: 0;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+
+.header ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+.header img{
+  height:250px;
+  width: auto;
+  top: -40px;
+  left: 0px;
+  animation-name: move;
+  animation-duration: 3s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+  /* transition: 1s ; */
+
+}
+h1{
+  text-align: center;
+  font-size: 4em;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.logo img{
+  width: 80px;
+
+
+}
+
+
+
+/* .header img:hover{
+  transform: rotate(360deg) translateX(200px);
+
+} */
+
+.icons ul {
+  margin-top: -600px;
+
+  animation-name: drop;
+  animation-delay: 2s;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+h1 span {
+  display: inline-block;
+  animation: animate;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+h1 span:nth-child(1){
+  animation-delay: 0.2s
+}
+h1 span:nth-child(2){
+  animation-delay: 0.4s;
+  color: #F5B23F;
+}
+h1 span:nth-child(3){
+  animation-delay: 0.6s
+}
+h1 span:nth-child(4){
+  animation-delay: 0.8s;
+  color: #F5B23F;
+}
+h1 span:nth-child(5){
+  animation-delay: 1s
+}
+h1 span:nth-child(6){
+  animation-delay: 1.2s;
+  color: #F5B23F;
+}
+h1 span:nth-child(7){
+  animation-delay: 1.4s
+}
+h1 span:nth-child(8){
+  animation-delay: 1.6s;
+  color: #F5B23F;
+}
+h1 span:nth-child(9){
+  animation-delay: 1.8s;
+
+}
+
+
+
+
+@keyframes move{
+  from{ transform: translateX(-400px)}
+  to{ transform: translateX(1200px)}
+}
+
+@keyframes drop{
+  0%{}
+  70%{transform: translateY(650px)}
+  100%{transform: translateY(550px)}
+}
+
+@keyframes animate{
+  0%{
+  transform: translateY(0px);
+  }
+  10%{
+  transform: translateY(-80px);
+  }
+  15%{
+  transform: translateY(0px);
+  }
+  25%{
+  transform: translateY(-20px);
+  }
+  30%{
+  transform: translateY(0px);
+  }
+  40%{
+  transform: translateY(-10px);
+  }
+  45%{
+  transform: translateY(0px);
+  }
+  100%{
+  transform: translateY(0px);
+  }
+}
