@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import HomePage from './components/HomePage';
-import PetComponent from './components/PetComponent';
+import HeroComponent from './components/HeroComponent';
 import Header from './components/Header';
 
 
