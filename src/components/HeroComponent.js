@@ -34,7 +34,12 @@ var HeroComponent = function(props) {
   return (
     <div style={comstyle}>
       {result}
-      <h3>{props.heroName} Likes: {props.likesCount}</h3>
+      {(props.result) ?(
+        <h3>{props.heroName} Likes: {props.likesCount}</h3>
+        ) : (
+      <h3>{props.heroName}</h3>   
+      )}
+
       <img style={{height:'500px', width:'500px'}} src={props.heroImageUrl} alt={"doggy" + props.heroName}/>
       <br />
       <button style={btnCatstyle} value={props.heroName} disabled={disabled} onClick={props.onLikeBtnClick}>Like</button>
