@@ -16,59 +16,33 @@ var btnCatstyle = {
   borderRadius: '20px',
 }
 
-class HeroComponent extends React.Component {
 
-  constructor(props) {   ///   OR I can use the constructor
-    super(props);
+var HeroComponent = function(props) {
+  var result = null;
+  var disabled = false;
 
-    // this.handleLikeBtn = this.handleLikeBtn.bind(this);
-    // this.handleDislikeBtn = this.handleDislikeBtn.bind(this);
+  if (props.result !== ''){
+  var resultStyle = null;
+    if (props.result === 'LOSER'){
+      resultStyle = { color: 'red'};
+    }else {
+      resultStyle = { color: 'green'}
+    }
+    result = <h2 style={resultStyle}>{props.result}</h2>
+    disabled = true;
   }
-
-
-
-  // handleLikeBtn() {
-    // console.log('before setState1: ' + this.state.likesCount)
-    // this.setState(function(prevState) {
-    //   let newState = {        /////// Creating newState //////
-    //   return {
-    //     likesCount: prevState.likesCount + 1
-    //   }
-    //
-    //   })
-    //   console.log('after setSTate1:' + newState.likesCount)  //// console new setState /////
-    //   return newState;
-    // }
-
-
-    // console.log('another after:' + this.state.likesCount)
-
-
-  // handleDislikeBtn() {
-    // console.log('before setState2: ' + this.state.likesCount)
-    // this.setState(function(prevState) {
-    //   let newState = {
-    //   return {
-    //     likesCount: prevState.likesCount - 1
-    //   }
-    //   })
-    //   console.log('after setSTate2:' + newState.likesCount)
-    //   return newState;
-    // }
-
-  render() {
-
-    return (
-      <div style={comstyle}>
-        <h3>{this.props.heroName} Likes: {this.props.likesCount}</h3>
-        <img style={{height:'500px', width:'500px'}} src={this.props.heroImageUrl} alt={"doggy" + this.props.heroName}/>
-        <br />
-        <button style={btnCatstyle} value={this.props.heroName} onClick={this.props.onLikeBtnClick}>Like</button>
-        <button style={btnCatstyle} value={this.props.heroName} onClick={this.props.onDisLikeBtnClick}>Dislike</button>
-      </div>
-    )
-  }
+  return (
+    <div style={comstyle}>
+      {result}
+      <h3>{props.heroName} Likes: {props.likesCount}</h3>
+      <img style={{height:'500px', width:'500px'}} src={props.heroImageUrl} alt={"doggy" + props.heroName}/>
+      <br />
+      <button style={btnCatstyle} value={props.heroName} disabled={disabled} onClick={props.onLikeBtnClick}>Like</button>
+      <button style={btnCatstyle} value={props.heroName} disabled={disabled} onClick={props.onDisLikeBtnClick}>Dislike</button>
+    </div>
+  )
 }
+
 
 
 export default HeroComponent;

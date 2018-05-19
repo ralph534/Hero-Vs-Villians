@@ -15,48 +15,50 @@ class HomePage extends React.Component{
     super(props);
     this.state = {
       catLikesCount: 0,
-      dogLikesCount: 0
+      dogLikesCount: 0,
+      catResult: '',
+      dogResult: ''
     }
-    this.handleLikeBtn = this.handleLikeBtn.bind(this);
-    this.handleDislikeBtn = this.handleDislikeBtn.bind(this);
+
+    this.handleLikeBtn = this.handleLikeBtn.bind(this)
+    this.handleDisLikeBtn = this.handleDisLikeBtn.bind(this)
     this.handleShowWinnerBtnClick = this.handleShowWinnerBtnClick.bind(this)
     this.handleStartOverBtnClick = this.handleStartOverBtnClick.bind(this)
   }
 
-  handleLikeBtn(event) {
-    var heroName = event.target.value;
-    if (heroName === 'Cat') {
+  handleLikeBtn(event){
+    let heroName = event.target.value;
+
+    if (heroName === "Cat"){
       this.setState(function(prevState){
-        return {
+        return{
           catLikesCount: prevState.catLikesCount + 1,
-          dogLikesCount: prevState.dogLikesCount
         }
       })
-    } else if (heroName === 'Dog') {
+    } else if (heroName === "Dog"){
       this.setState(function(prevState){
-        return {
-          catLikesCount: prevState.catLikesCount,
+        return{
           dogLikesCount: prevState.dogLikesCount + 1
         }
       })
     }
+
   }
 
 
-  handleDislikeBtn(event) {
-    var heroName = event.target.value;
-    if (heroName === 'Cat') {
+  handleDisLikeBtn(event) {
+    let heroName = event.target.value;
+
+    if (heroName === "Cat"){
       this.setState(function(prevState){
-        return {
-          catLikesCount : prevState.catLikesCount - 1,
-          dogLikesCount : prevState.dogLikesCount
+        return{
+          catLikesCount: prevState.catLikesCount - 1,
         }
       })
-    } else if (heroName === 'Dog') {
+    } else if (heroName === "Dog"){
       this.setState(function(prevState){
-        return {
-          catLikesCount : prevState.catLikesCount,
-          dogLikesCount : prevState.dogLikesCount - 1
+        return{
+          dogLikesCount: prevState.dogLikesCount - 1
         }
       })
     }
@@ -65,20 +67,33 @@ class HomePage extends React.Component{
   handleShowWinnerBtnClick(){
     var catLikesCount = this.state.catLikesCount;
     var dogLikesCount = this.state.dogLikesCount;
+    var catResult = 'TIE';
+    var dogResult = 'TIE';
 
 
-   if (catLikesCount > dogLikesCount) {
-     console.log('Cat is the winner');
-   }else if (catLikesCount < dogLikesCount) {
-     console.log('Dog is the winner');
-   }else {
-     console.log('Its a Tie');
-   }
+    if(catLikesCount > dogLikesCount){
+      catResult = 'WINNER';
+      dogResult = 'LOSER';
+    }else if(catLikesCount < dogLikesCount){
+      catResult = 'LOSER';
+      dogResult = 'WINNER';
+    }
+    this.setState({
+      catResult: catResult,
+      dogResult: dogResult
+    })
+
+
  }
 
 
   handleStartOverBtnClick(){
-
+    this.setState({
+        catLikesCount: 0,
+        dogLikesCount: 0,
+        catResult: '',
+        dogResult: ''
+    })
   }
 
 
@@ -99,19 +114,22 @@ class HomePage extends React.Component{
          <div style={{marginTop: '10px',textAlign: 'center'}}>
            <HeroComponent
               heroName="Cat"
-              likesCount={this.state.catLikesCount}
               heroImageUrl="https://static1.squarespace.com/static/51b3dc8ee4b051b96ceb10de/t/596c2e2d440243ae7ec9e0cb/1500261938535/?format=750w"
-              onLikeBtnClick = {this.handleLikeBtn}
-              onDisLikeBtnClick = {this.handleDislikeBtn}
-           />
+              likesCount={this.state.catLikesCount}
+              result={this.state.catResult}
+              onLikeBtnClick={this.handleLikeBtn}
+              onDisLikeBtnClick={this.handleDisLikeBtn}
+              />
+
          <HeroComponent
               heroName="Dog"
-              likesCount={this.state.dogLikesCount}
               heroImageUrl="https://www.sideshowtoy.com/wp-content/uploads/2018/04/marvel-avengers-infinity-war-thanos-sixth-scale-figure-hot-toys-feature-903429-1.jpg"
-              onLikeBtnClick = {this.handleLikeBtn}
-              onDisLikeBtnClick = {this.handleDislikeBtn}
-            />
-         </div>
+              likesCount={this.state.dogLikesCount}
+              result={this.state.dogResult}
+              onLikeBtnClick={this.handleLikeBtn}
+              onDisLikeBtnClick={this.handleDisLikeBtn}
+              />
+          </div>
          <div style={{textAlign: 'center'}}>
            <button style={btnStyle} onClick={this.handleShowWinnerBtnClick}>Show Winner!!</button>
            <button style={btnStyle} onClick={this.handleStartOverBtnClick}>Start Over!!</button>
