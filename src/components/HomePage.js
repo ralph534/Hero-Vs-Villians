@@ -15,9 +15,9 @@ class HomePage extends React.Component{
     super(props);
     this.state = {
       catLikesCount: 0,
-      dogLikesCount: 0,
+      dogLikesCount:  0,
       catResult: '',
-      dogResult: ''
+      dogResult: '',
     }
 
     this.handleLikeBtn = this.handleLikeBtn.bind(this)
@@ -29,18 +29,19 @@ class HomePage extends React.Component{
   handleLikeBtn(event){
     let heroName = event.target.value;
 
-    if (heroName === "Cat"){
+    if (heroName == "Cat") {
       this.setState(function(prevState){
         return{
           catLikesCount: prevState.catLikesCount + 1,
         }
       })
-    } else if (heroName === "Dog"){
+    }else if (heroName === "Dog"){
       this.setState(function(prevState){
         return{
-          dogLikesCount: prevState.dogLikesCount + 1
+          dogLikesCount: prevState.dogLikesCount + 1,
+
         }
-      })
+            })
     }
 
   }
