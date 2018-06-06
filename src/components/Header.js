@@ -3,18 +3,11 @@ import {render} from 'react-dom';
 import '../Header.css';
 
 
-const styles = {
-  transition: 'all 1s ease-out'
-}
 
 class Header extends React.Component {
 
 
   render() {
-
-
-
-
     return(
       <div className='header'>
         <div className='imagine'>

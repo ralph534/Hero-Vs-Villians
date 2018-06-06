@@ -1,7 +1,15 @@
 import React from 'react';
+import axios from 'axios';
 import HeroComponent from './HeroComponent';
 import Header from './Header'
 import '../Header.css';
+import path from 'path';
+import {random} from 'lodash';
+
+
+
+let heros = [path.resolve('./heros/hero(1).jpg'), path.resolve('./heros/hero(2).jpg'), path.resolve('./heros/hero(3).png'), path.resolve('./heros/hero(4).jpg')];
+let villains = [path.resolve('./heros/hero(1).jpg'), path.resolve('./heros/hero(2).jpg'), path.resolve('./heros/hero(3).jpg'), path.resolve('./heros/hero(4).jpg')];
 
 
 var btnStyle ={
@@ -10,12 +18,20 @@ var btnStyle ={
   height: '25px'
 };
 
+// var API_KEY = '123456789';
+//
+// var CAT_URL = 'http://localhost:63000/cat/?api_key=' + API_KEY;
+// var DOG_URL = 'http://localhost:63000/dog/?api_key=' + API_KEY;
+
 class HomePage extends React.Component{
+
   constructor(props){
+    // const images = importAll(require.context('../public/heros', false, /\.(png|jpe?g|svg)$/));
     super(props);
     this.state = {
-      cat: {likesCount: 0 , result: ''},
-      dog: {likesCount: 0 , result: ''}
+      cat: {likesCount: 0 , result: '', imageUrl: villains[random(0,3)]},
+      dog: {likesCount: 0 , result: '', imageUrl: heros[random(0,3)]},
+      images: {heros: heros, villains: villains}
     }
 
 
@@ -25,19 +41,66 @@ class HomePage extends React.Component{
     this.handleStartOverBtnClick = this.handleStartOverBtnClick.bind(this)
   }
 
-  handleLikeBtn(event){
-    let heroName = event.target.value;
 
+  // componentDidMount(){
+  //   this.fetchImages();
+  // }
+  //
+  // fetchCatImage(){
+  //   axios.get(CAT_URL)
+  //        .then(function(resp){
+  //       var imageUrl = resp.data.imageUrl;
+  //
+  //         this.setState(function(prevState){
+  //           return{
+  //             cat: {likesCount: prevState.cat.likesCount, result: prevState.cat.result, imageUrl: imageUrl}
+  //           }
+  //         })
+  //       }.bind(this))
+  // }
+  //
+  // fetchDogImage(){
+  //   axios.get(DOG_URL)
+  //        .then(function(resp){
+  //       var imageUrl = resp.data.imageUrl;
+  //
+  //         this.setState(function(prevState){
+  //           return{
+  //             dog: {likesCount: prevState.dog.likesCount, result: prevState.dog.result, imageUrl: imageUrl}
+  //           }
+  //         })
+  //       }.bind(this))
+  // }
+  // fetchImages(){
+  //   this.fetchCatImage();
+  //   this.fetchDogImage();
+  // }
+
+  handleLikeBtn(event){
+    // this.setState(function(prevState) {
+    //   return {
+    //     dog: {likesCount: prevState.dog.likesCount + 1, result: prevState.dog.result, imageUrl: this.state.images.heros[random(0,3)]}
+    //   }
+    // })
+    // function importAll(r) {
+    // return r.keys().map(r);
+
+  // const images = importAll(require.context('../public/heros', false, /\.(png|jpe?g|svg)$/));
+
+
+
+    let heroName = event.target.value;
     if (heroName === "Cat") {
       this.setState(function(prevState){
         return{
-          cat: {likesCount: prevState.cat.likesCount + 1, result: prevState.cat.result},
+          cat: {likesCount: prevState.cat.likesCount + 1, result: prevState.cat.result, imageUrl: this.state.images.villains[random(0,3)]}
+
         }
       })
     }else if (heroName === "Dog"){
       this.setState(function(prevState){
         return{
-          dog: {likesCount: prevState.dog.likesCount + 1, result: prevState.dog.result}
+          dog: {likesCount: prevState.dog.likesCount + 1, result: prevState.dog.result, imageUrl: this.state.images.heros[random(0,3)]}
         }
             })
     }
@@ -46,18 +109,19 @@ class HomePage extends React.Component{
 
 
   handleDisLikeBtn(event) {
+    // this.fetchImages();
     let heroName = event.target.value;
 
     if (heroName === "Cat") {
       this.setState(function(prevState){
         return{
-          cat: {likesCount: prevState.cat.likesCount - 1, result: prevState.cat.result},
+          cat: {likesCount: prevState.cat.likesCount - 1, result: prevState.cat.result, imageUrl: this.state.images.villains[random(0,3)]}
         }
       })
     }else if (heroName === "Dog"){
       this.setState(function(prevState){
         return{
-          dog: {likesCount: prevState.dog.likesCount - 1, result: prevState.dog.result},
+          dog: {likesCount: prevState.dog.likesCount - 1, result: prevState.dog.result, imageUrl: this.state.images.heros[random(0,3)]}
 
         }
             })
@@ -65,6 +129,7 @@ class HomePage extends React.Component{
     }
 
   handleShowWinnerBtnClick(){
+    // this.fetchImages();
     var catLikesCount = this.state.cat.likesCount;
     var dogLikesCount = this.state.dog.likesCount;
     var catResult = 'TIE';
@@ -80,8 +145,8 @@ class HomePage extends React.Component{
     }
     this.setState(function(prevState){
       return{
-        cat: {likesCount: prevState.cat.likesCount, result: catResult},
-        dog: {likesCount: prevState.dog.likesCount, result: dogResult}
+        cat: {likesCount: prevState.cat.likesCount, result: catResult, imageUrl: prevState.cat.imageUrl},
+        dog: {likesCount: prevState.dog.likesCount, result: dogResult, imageUrl: prevState.dog.imageUrl}
       }
     })
   }
@@ -89,8 +154,9 @@ class HomePage extends React.Component{
 
   handleStartOverBtnClick(){
     this.setState({
-        cat: {likesCount: 0, result: ''},
-        dog: {likesCount: 0, result: ''}
+      cat: {likesCount: 0 , result: '', imageUrl: villains[random(0,3)]},
+      dog: {likesCount: 0 , result: '', imageUrl: heros[random(0,3)]},
+      images: {heros: heros, villains: villains}
     })
 }
 
@@ -111,7 +177,7 @@ class HomePage extends React.Component{
          <div style={{marginTop: '10px',textAlign: 'center'}}>
            <HeroComponent
               heroName="Cat"
-              heroImageUrl="https://static1.squarespace.com/static/51b3dc8ee4b051b96ceb10de/t/596c2e2d440243ae7ec9e0cb/1500261938535/?format=750w"
+              heroImageUrl={this.state.cat.imageUrl}
               likesCount={this.state.cat.likesCount}
               result={this.state.cat.result}
               onLikeBtnClick={this.handleLikeBtn}
@@ -120,7 +186,7 @@ class HomePage extends React.Component{
 
          <HeroComponent
               heroName="Dog"
-              heroImageUrl="https://www.sideshowtoy.com/wp-content/uploads/2018/04/marvel-avengers-infinity-war-thanos-sixth-scale-figure-hot-toys-feature-903429-1.jpg"
+              heroImageUrl={this.state.dog.imageUrl}
               likesCount={this.state.dog.likesCount}
               result={this.state.dog.result}
               onLikeBtnClick={this.handleLikeBtn}

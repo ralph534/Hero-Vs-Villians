@@ -17,12 +17,13 @@ var btnCatstyle = {
 }
 
 
+
 var HeroComponent = function(props) {
   var result = null;
   var disabled = false;
 
   if (props.result !== ''){
-  var resultStyle = null;
+  var resultStyle = {};
     if (props.result === 'LOSER'){
       resultStyle = { color: 'red'};
     }else {
