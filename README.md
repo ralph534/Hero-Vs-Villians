@@ -12,7 +12,7 @@ Copy Repository.
 git clone [paste repository here..]
 ```
 
-## If error
+## If any errors
 
 ```
 You might need to run npm install beacuse you might need certain packages to run...
